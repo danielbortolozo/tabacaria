@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2d342aac-d600-4d39-8cf8-f1214da95fd3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="logo" class="java.io.InputStream"/>
+	<parameter name="idVenda" class="java.lang.String"/>
+	<parameter name="operador" class="java.lang.String"/>
+	<parameter name="cliente" class="java.lang.String"/>
+	<parameter name="parcelas" class="java.lang.String"/>
+	<parameter name="tipoVenda" class="java.lang.String"/>
+	<parameter name="vencimento" class="java.lang.String"/>
+	<parameter name="cpf" class="java.lang.String"/>
+	<parameter name="total" class="java.lang.String"/>
+	<parameter name="subTotal" class="java.lang.String"/>
+	<field name="codigoProduto" class="java.lang.String"/>
+	<field name="qtdProduto" class="java.lang.String"/>
+	<field name="undProduto" class="java.lang.String"/>
+	<field name="vlUnit" class="java.lang.String"/>
+	<field name="vlTotal" class="java.lang.String"/>
+	<field name="desconto" class="java.lang.String"/>
+	<field name="descricaoProduto" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="84" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="0" y="-2" width="555" height="84" uuid="45ea00f6-a817-464e-ae72-49e9a6905796"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="422" y="24" width="131" height="15" uuid="633d73ca-3f2b-43b8-9c42-21590d0501ae"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[CNPJ : 00.000.000/0001-00]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="422" y="0" width="130" height="20" uuid="d34fd66b-8e06-4230-9714-46a2c03a668e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tel. (17)3462-2889]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="141" y="67" width="285" height="15" uuid="f7f20498-e5e2-4d5b-b6eb-e21c3f7bfefc"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Rua. Rio Grande do Sul, 546 - centro - Fernandóplis - SP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="422" y="40" width="106" height="15" uuid="1fe0b9ae-e787-4ce1-9c3c-3aaa51082851"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[I.E : 02.232.3355-6]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="138" y="10" width="278" height="37" uuid="5d6a5dff-7e4c-42fb-a594-f7223449cfcb"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif" size="15" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[DaRocca Perfumaria & Artesanato]]></text>
+			</staticText>
+			<image>
+				<reportElement x="5" y="1" width="140" height="78" uuid="83d704dd-cbb2-4c88-9a07-7fba16badf22"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="132" splitType="Stretch">
+			<rectangle>
+				<reportElement x="1" y="94" width="554" height="37" uuid="d40aa64e-e61b-4e2f-a8fd-ba6cdaa7cf41"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="15" width="555" height="65" uuid="47f60124-6115-4b41-9f94-b6045c55e7e8"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="201" y="-2" width="158" height="17" uuid="720ae69c-c0d2-43b9-af43-ea97aec15798"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Serif" size="14" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Cupom Consumidor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="3" width="87" height="12" uuid="50496dc1-9efa-42ff-b0b6-e399d887caac"/>
+				<textElement>
+					<font fontName="SansSerif" size="9"/>
+				</textElement>
+				<text><![CDATA[DADOS VENDA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="20" width="65" height="12" uuid="4adeb1f2-db79-4ccd-b126-016cd7676ef3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[CÓD. VENDA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="57" width="64" height="12" uuid="2fc7e743-e41c-4871-b63a-d149fd76f823"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[TIPO VENDA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="38" width="65" height="12" uuid="6a395efc-0919-4831-84bf-6a8184506a39"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[VENDEDOR:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="186" y="58" width="52" height="12" uuid="68de5a6e-0f2c-482a-a254-eaad59fe0f63"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[PARCELAS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="406" y="58" width="81" height="12" uuid="864042ce-7049-4f88-90e0-a05616c8a5c8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[1º VENCIMENTO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="405" y="20" width="32" height="12" uuid="bfc5e5c5-c96b-4cf2-bbb9-8c687580b28d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[DATA:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy HH:mm">
+				<reportElement x="437" y="20" width="100" height="12" uuid="ea9f58d4-2154-4abe-add9-9f59ac54e759"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="82" width="87" height="12" uuid="d789993f-39dc-43fc-aa98-843a996b399e"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[DADOS CLIENTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="107" width="46" height="12" uuid="54ac7cab-93b6-4ce9-80e5-0fbfb7c39291"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[CLIENTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="376" y="108" width="56" height="12" uuid="271c663e-6e55-47f1-98a4-064568fb074f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[CPF / CNPJ:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="53" y="107" width="228" height="12" uuid="c43220a1-0970-4a5d-aed0-f5e9139e43bb"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="433" y="108" width="100" height="12" uuid="af2e66a5-d8a3-4e14-9cfc-fce2b8da5161"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cpf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="487" y="57" width="68" height="12" uuid="26f1abac-06ea-4afc-961b-c2d53c97a5c7"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{vencimento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="71" y="20" width="68" height="12" uuid="6a01826a-351e-4a0f-9b87-2f12812b3806"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{idVenda}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="71" y="38" width="241" height="12" uuid="40fa3df0-70d6-4c4d-90c5-b9a05a728b94"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{operador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="71" y="57" width="100" height="12" uuid="5a5ebf4a-19ee-4aa5-8484-0421b3977977"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tipoVenda}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="58" width="31" height="12" uuid="9ccda391-3c20-4ad6-8d51-d6c6aee31c17"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{parcelas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="18" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="16" width="555" height="1" uuid="ce0427d9-1471-4981-9d90-77c584cd70b1"/>
+			</line>
+			<staticText>
+				<reportElement x="324" y="3" width="24" height="12" uuid="ab4bec7a-cb95-4173-ab95-41abed80337f"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[QTD.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="493" y="3" width="54" height="12" uuid="f2bd97f4-5fee-46ec-8db4-893d08cf5f3c"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[R$ TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="168" y="3" width="89" height="12" uuid="8c7e110c-4230-4fe1-bc62-6d08e7d8cafd"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIÇÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="434" y="3" width="40" height="12" uuid="a9ee77ed-f45e-4ed2-b392-0c41e3f17a1e"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESC. %]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="34" y="3" width="55" height="12" uuid="ed3b1e7f-f994-49cf-bd25-e796c6bfb579"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CÓD. PROD.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="3" width="30" height="12" uuid="5c1d3041-a291-40b6-8fdf-4ef939b69298"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ITENS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="353" y="3" width="26" height="12" uuid="8ba9ec84-a873-4c51-9d22-243ca609f680"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UND.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="385" y="3" width="42" height="12" uuid="9c2cc530-558e-4fe4-b69d-4c0b0144f737"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[R$ UNIT.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<textField>
+				<reportElement x="8" y="4" width="18" height="13" uuid="00c9db5f-71fb-4d2f-9985-f63afb7c4421"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="34" y="4" width="43" height="13" uuid="2c7ca375-4e1a-47c9-93a0-95fdb7064414"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigoProduto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="93" y="4" width="219" height="13" uuid="be18e573-be46-4879-be73-0f14efa4ebd6"/>
+				<textFieldExpression><![CDATA[$F{descricaoProduto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="324" y="4" width="24" height="13" uuid="0b5ba79f-d749-4a37-a016-4e2c0c381316"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qtdProduto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="357" y="4" width="18" height="13" uuid="0ac96fa2-8429-4467-89e0-cbc56d94e453"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{undProduto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="385" y="4" width="42" height="13" uuid="b70d0c9b-8028-4c9b-bb99-ebf84533af2f"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vlUnit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="436" y="4" width="29" height="13" uuid="bf264239-ae29-4404-a524-f218ec851240"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{desconto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="474" y="4" width="74" height="13" uuid="683d1617-1df3-4c77-979d-ef74b8120a4e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{vlTotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="442" y="4" width="42" height="12" uuid="04f8bb11-9314-45c9-bc33-3354419baafd"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[R$ Total:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="309" y="4" width="64" height="12" uuid="6bb72749-92ee-4d7a-9ea8-924526eba747"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[R$ SubTotal:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="374" y="4" width="63" height="12" uuid="819d0a5e-a6e5-493d-beca-6debe65a0c30"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{subTotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="485" y="4" width="67" height="12" uuid="3a0e6053-eb59-4f52-961b-d830797b7988"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="2" width="555" height="1" uuid="6a52a525-0127-45ea-91a9-a8f9fe5ae247"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

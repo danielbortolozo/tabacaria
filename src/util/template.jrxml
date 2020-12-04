@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a50933e0-cf1b-4beb-a0fa-f1956f7c648a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="empresa_nome" class="java.lang.String"/>
+	<parameter name="empresa_endereco" class="java.lang.String"/>
+	<parameter name="empresa_telefone" class="java.lang.String"/>
+	<parameter name="empresa_cnpj" class="java.lang.String"/>
+	<parameter name="empresa_ie" class="java.lang.String"/>
+	<parameter name="logo" class="java.lang.Object"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="91" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="0" y="0" width="555" height="89" uuid="1ad9e19a-dc4f-432e-9e6b-2907974cf08a"/>
+			</rectangle>
+			<image>
+				<reportElement x="10" y="6" width="120" height="79" uuid="93ef3316-b466-4876-9c7f-37d4f917e232"/>
+				<imageExpression><![CDATA[new ByteArrayInputStream((byte[])$P{logo})]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="513" y="73" width="23" height="13" uuid="22777e9b-670e-49bf-aee8-f2b4828d9592"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="411" y="9" width="26" height="20" uuid="c952f826-7616-4bdf-927d-4c869f735a2c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tel. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="411" y="33" width="28" height="15" uuid="4e8718e9-0a0f-4c40-afee-9153b68a2820"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[CNPJ:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="411" y="52" width="15" height="15" uuid="b2ecd739-0774-4b85-8c3e-ce3140ba51c6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[I.E: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="440" y="32" width="111" height="15" uuid="4457c45b-5735-46c6-bf97-9c05e4503aac"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{empresa_cnpj}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="438" y="9" width="116" height="20" uuid="10b548d2-ad26-4ca8-8bf2-806449b2f5fc"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{empresa_telefone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="115" y="3" width="297" height="35" uuid="f049f847-92d5-4dd2-b02e-965b861f7953"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif" size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{empresa_nome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="485" y="71" width="23" height="15" uuid="30e84b9d-19a5-45f7-b7d2-2b30476bc3a8"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Pág.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="427" y="51" width="124" height="15" uuid="75b6358c-230f-49f8-93ec-095fad92cc1d"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{empresa_ie}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="132" y="73" width="325" height="16" uuid="3591807f-e907-4e9d-8991-48763e751001"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{empresa_endereco}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

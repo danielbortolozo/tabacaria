@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="VendaPorCliente_ItensVenda1" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="032a86ae-a2e1-401a-ab74-9fffa2ef7c80">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idPessoa" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select v.dt_cad, v.desconto, v.subtotal, v.total from venda_cab v, pessoa p
+where p.id=v.id_cliente and v.id_cliente=$P{idPessoa}]]>
+	</queryString>
+	<field name="dt_cad" class="java.sql.Date"/>
+	<field name="desconto" class="java.math.BigDecimal"/>
+	<field name="subtotal" class="java.math.BigDecimal"/>
+	<field name="total" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="24" y="2" width="100" height="20" uuid="13c31ed8-66c7-42bf-9051-8d53eff7e2bc"/>
+				<text><![CDATA[dt_cad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="175" y="2" width="100" height="20" uuid="b15dcde4-8b55-4483-94ae-08c1136153cd"/>
+				<text><![CDATA[desconto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="296" y="0" width="100" height="20" uuid="e3e2de6a-37e1-4917-be3e-236b15610374"/>
+				<text><![CDATA[subtotal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="428" y="2" width="100" height="20" uuid="afaaaa71-0314-4791-a549-a3aafea11793"/>
+				<text><![CDATA[total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="29" splitType="Stretch">
+			<textField>
+				<reportElement x="24" y="3" width="100" height="20" uuid="79ce760b-269f-4f49-b2fc-6d5465e29448"/>
+				<textFieldExpression><![CDATA[$F{dt_cad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="175" y="3" width="100" height="20" uuid="5f18b63a-1f9a-4a2c-9fb6-20ec0df58d40"/>
+				<textFieldExpression><![CDATA[$F{desconto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="3" width="100" height="20" uuid="ee8c7e9b-00a1-4b66-b840-27e7b01d92ce"/>
+				<textFieldExpression><![CDATA[$F{subtotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="439" y="3" width="100" height="20" uuid="2e9c45d4-a033-42bd-9b65-aa8f49cc0781"/>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

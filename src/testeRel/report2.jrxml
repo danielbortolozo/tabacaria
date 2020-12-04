@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9510ffc5-5c8d-49e5-8e7a-1d757763964d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="10"/>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<subDataset name="charDataSet" uuid="3b7b2e66-bab0-43ac-b575-ed7fd82df9ca">
+		<parameter name="dt_ini" class="java.util.Date">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<parameter name="dt_fim" class="java.util.Date"/>
+		<queryString>
+			<![CDATA[SELECT
+     sum(pagamento_det."vl_pago") AS soma,
+     pagamento_det."vl_pago" AS pagamento_det_vl_pago,
+     categoria_conta."descricao" AS categoria_conta_descricao
+FROM
+     "public"."pagamento_cab" pagamento_cab INNER JOIN "public"."pagamento_det" pagamento_det ON pagamento_cab."id" = pagamento_det."id_pagamento_cab"
+     INNER JOIN "public"."categoria_conta" categoria_conta ON pagamento_cab."id_categoria" = categoria_conta."id"
+WHERE
+     pagamento_det."vl_pago" > 0 and pagamento_det.dt_pagamento between $P{dt_ini} and $P{dt_fim}
+GROUP BY
+     categoria_conta_descricao,
+     pagamento_det."vl_pago"]]>
+		</queryString>
+		<field name="soma" class="java.lang.Float"/>
+		<field name="pagamento_det_vl_pago" class="java.lang.Float"/>
+		<field name="categoria_conta_descricao" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="data_ini" class="java.util.Date"/>
+	<parameter name="data_fim" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT
+     pagamento_cab."id" AS pagamento_cab_id,
+     pagamento_cab."descricao" AS pagamento_cab_descricao,
+     pagamento_cab."emissao" AS pagamento_cab_emissao,
+     pagamento_cab."qtd_parcela" AS pagamento_cab_qtd_parcela,
+     pagamento_cab."subtotal" AS pagamento_cab_subtotal,
+     pagamento_cab."vl_total" AS pagamento_cab_vl_total,
+     pagamento_det."desconto" AS pagamento_det_desconto,
+     pagamento_det."dt_pagamento" AS pagamento_det_dt_pagamento,
+     pagamento_det."juro" AS pagamento_det_juro,
+     pagamento_det."multa" AS pagamento_det_multa,
+     pagamento_det."num_parcela" AS pagamento_det_num_parcela,
+     pagamento_det."vencimento" AS pagamento_det_vencimento,
+     pagamento_det."vl_pago" AS pagamento_det_vl_pago,
+     pagamento_det."vl_parcela" AS pagamento_det_vl_parcela,
+     categoria_conta."descricao" AS categoria_conta_descricao,
+     pessoa."nome" AS fornecedor,
+     tipo_pagamento."descricao" AS tipo_pagamento_descricao,
+     banco."descricao" AS banco_descricao
+FROM
+     "public"."pagamento_cab" pagamento_cab INNER JOIN "public"."pagamento_det" pagamento_det ON pagamento_cab."id" = pagamento_det."id_pagamento_cab"
+     INNER JOIN "public"."categoria_conta" categoria_conta ON pagamento_cab."id_categoria" = categoria_conta."id"
+     INNER JOIN "public"."pessoa" pessoa ON pagamento_cab."id_fornecedor" = pessoa."id"
+     INNER JOIN "public"."tipo_pagamento" tipo_pagamento ON pagamento_det."id_tipo_pagamento" = tipo_pagamento."id"
+     INNER JOIN "public"."banco" banco ON pagamento_det."id_banco" = banco."id"
+WHERE
+     pagamento_det.vl_pago > 0
+     and pagamento_det.dt_pagamento BETWEEN $P{data_ini} and $P{data_fim}
+ORDER BY
+     categoria_conta."descricao" ASC,
+     pagamento_det."dt_pagamento" ASC]]>
+	</queryString>
+	<field name="pagamento_cab_id" class="java.lang.Long"/>
+	<field name="pagamento_cab_descricao" class="java.lang.String"/>
+	<field name="pagamento_cab_emissao" class="java.sql.Date"/>
+	<field name="pagamento_cab_qtd_parcela" class="java.lang.Integer"/>
+	<field name="pagamento_cab_subtotal" class="java.lang.Float"/>
+	<field name="pagamento_cab_vl_total" class="java.lang.Float"/>
+	<field name="pagamento_det_desconto" class="java.lang.Float"/>
+	<field name="pagamento_det_dt_pagamento" class="java.sql.Date"/>
+	<field name="pagamento_det_juro" class="java.lang.Float"/>
+	<field name="pagamento_det_multa" class="java.lang.Float"/>
+	<field name="pagamento_det_num_parcela" class="java.lang.Integer"/>
+	<field name="pagamento_det_vencimento" class="java.sql.Date"/>
+	<field name="pagamento_det_vl_pago" class="java.lang.Float"/>
+	<field name="pagamento_det_vl_parcela" class="java.lang.Float"/>
+	<field name="categoria_conta_descricao" class="java.lang.String"/>
+	<field name="fornecedor" class="java.lang.String"/>
+	<field name="tipo_pagamento_descricao" class="java.lang.String"/>
+	<field name="banco_descricao" class="java.lang.String"/>
+	<variable name="pagamento_det_vl_pago_1" class="java.lang.Float" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{pagamento_det_vl_pago}]]></variableExpression>
+	</variable>
+	<variable name="pagamento_det_vl_pago_2" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{pagamento_det_vl_pago}]]></variableExpression>
+	</variable>
+	<variable name="pagamento_det_vl_pago_3" class="java.lang.Float" resetType="Group" resetGroup="categoria_conta_descricao" calculation="Sum">
+		<variableExpression><![CDATA[$F{pagamento_det_vl_pago}]]></variableExpression>
+	</variable>
+	<variable name="pagamento_det_vl_pago_4" class="java.lang.Float" resetType="Group" resetGroup="por_mes" calculation="Sum">
+		<variableExpression><![CDATA[$F{pagamento_det_vl_pago}]]></variableExpression>
+	</variable>
+	<group name="categoria_conta_descricao">
+		<groupExpression><![CDATA[$F{categoria_conta_descricao}]]></groupExpression>
+		<groupHeader>
+			<band height="26">
+				<rectangle>
+					<reportElement x="0" y="0" width="555" height="26" backcolor="#B0BBBC" uuid="ad8c9bbb-3b2b-4ecb-8a5e-f71fa1df4edc"/>
+				</rectangle>
+				<textField>
+					<reportElement x="178" y="0" width="213" height="20" uuid="ff627fef-3f76-46b2-89e7-595d383ab581"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{categoria_conta_descricao}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="24">
+				<textField pattern="¤ #,##0.00">
+					<reportElement x="414" y="0" width="100" height="20" uuid="d13c4b8b-1ce4-40f0-844c-90221380372c"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$V{pagamento_det_vl_pago_3}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="263" y="4" width="100" height="20" uuid="999c9947-ab34-42ac-9cd4-7f69d8ecb46e"/>
+					<text><![CDATA[Gastos por Conta]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="por_mes">
+		<groupExpression><![CDATA[$F{pagamento_det_dt_pagamento}.getMonth()]]></groupExpression>
+		<groupFooter>
+			<band height="23">
+				<rectangle>
+					<reportElement x="1" y="2" width="553" height="20" backcolor="#B0BBBC" uuid="d649bfe7-6390-47fa-be59-0407246ffd7b"/>
+				</rectangle>
+				<textField pattern="¤ #,##0.00">
+					<reportElement x="414" y="0" width="100" height="20" uuid="60e3d511-1c03-4d5f-9010-8ad7edba8b52"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$V{pagamento_det_vl_pago_4}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="261" y="0" width="100" height="20" uuid="7748f85f-3f7c-47a7-8c0e-bfd9186fa71e"/>
+					<text><![CDATA[Gastoas por Mes:]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="35" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="554" height="35" backcolor="#B0BBBC" uuid="f6e4b6bf-d59c-46ec-9d8f-8b927313cd95"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="155" y="0" width="292" height="35" uuid="e9ab353c-cb1f-4a60-ada5-18af0a6e4ea5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[GASTOS POR CONTAS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="136" height="20" uuid="c221c414-8205-4a63-86e1-2eb994c48423"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIÇÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="155" y="1" width="86" height="20" uuid="9c8f0bec-3a2e-4c2b-bdd1-7e24ad435053"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA EMISSÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="243" y="1" width="59" height="20" uuid="e4c40615-bfe0-4fb1-b38b-c92c1af2e8f4"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PARCELA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="331" y="2" width="100" height="20" uuid="7d4b5aa7-ae29-4859-b552-20bc3dd1a534"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[VALOR PAGO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="59" y="0" width="162" height="20" uuid="aae756d0-2f0a-496a-8f58-ceddbe34d942"/>
+				<textFieldExpression><![CDATA[$F{pagamento_cab_descricao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="326" y="0" width="18" height="20" uuid="d2e39943-cf28-484a-8746-25736c725749"/>
+				<textFieldExpression><![CDATA[$F{pagamento_cab_qtd_parcela}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="303" y="0" width="17" height="20" uuid="d889c597-d266-418a-a16f-a243b9f70d5d"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{pagamento_det_num_parcela}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="263" y="0" width="0" height="20" uuid="58356781-a01c-4440-ab74-ab63e02c4f90"/>
+				<text><![CDATA[/]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="390" y="1" width="100" height="20" uuid="540600f3-2243-4963-ac46-be79cc7abc79"/>
+				<textFieldExpression><![CDATA[$F{pagamento_det_vl_pago}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="221" y="1" width="63" height="20" uuid="06c237b6-b8d8-4fbf-ac2b-70ac64e5751b"/>
+				<textFieldExpression><![CDATA[$F{pagamento_det_dt_pagamento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="434" y="0" width="80" height="20" uuid="9df2735d-f279-4359-a8b8-34bd11bcf043"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="514" y="0" width="40" height="20" uuid="d4b42d4b-fb15-4fba-8e12-0d5499b0cd28"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="21" y="0" width="100" height="20" uuid="2f6c5336-67bf-4dca-8beb-78947a6ebdeb"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="458" splitType="Stretch">
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="423" y="11" width="100" height="20" uuid="576f34da-a62c-43ac-affc-08a249984457"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{pagamento_det_vl_pago_2}]]></textFieldExpression>
+			</textField>
+			<stackedBarChart>
+				<chart>
+					<reportElement x="1" y="41" width="553" height="184" uuid="d3aa6dc3-7a8a-4622-af0a-bffe21df25a8"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset>
+						<datasetRun subDataset="charDataSet" uuid="5c730515-567f-4c46-8a47-a2ee8138448e"/>
+					</dataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{categoria_conta_descricao}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{categoria_conta_descricao}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{soma}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</stackedBarChart>
+			<crosstab>
+				<reportElement x="1" y="241" width="555" height="195" uuid="ad87bda2-22ac-4c0c-96f4-5310a0c3989a"/>
+				<rowGroup name="categoria_conta_descricao" width="70" totalPosition="End">
+					<bucket class="java.lang.String">
+						<bucketExpression><![CDATA[$F{categoria_conta_descricao}]]></bucketExpression>
+					</bucket>
+					<crosstabRowHeader>
+						<cellContents backcolor="#F5F5DC" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="70" height="25" uuid="be57ecb5-ac24-450b-8231-030186d8ebb4"/>
+								<textFieldExpression><![CDATA[$V{categoria_conta_descricao}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabRowHeader>
+					<crosstabTotalRowHeader>
+						<cellContents backcolor="#FFFFBF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="25" uuid="b3638c62-0e18-4f6c-8bc2-71ac2c0d0d46"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Total categoria_conta_descricao]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalRowHeader>
+				</rowGroup>
+				<columnGroup name="pagamento_det_dt_pagamento" height="30" totalPosition="End">
+					<bucket class="java.sql.Date">
+						<bucketExpression><![CDATA[$F{pagamento_det_dt_pagamento}]]></bucketExpression>
+					</bucket>
+					<crosstabColumnHeader>
+						<cellContents backcolor="#F5F5DC" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField>
+								<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="30" uuid="c5ee88d2-346e-4e87-8eb5-6b2baed01ed7"/>
+								<textFieldExpression><![CDATA[$V{pagamento_det_dt_pagamento}]]></textFieldExpression>
+							</textField>
+						</cellContents>
+					</crosstabColumnHeader>
+					<crosstabTotalColumnHeader>
+						<cellContents backcolor="#FFFFBF" mode="Opaque">
+							<box>
+								<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30" uuid="ee45cb9c-548e-4a51-b3a2-87bec6120eec"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Total pagamento_det_dt_pagamento]]></text>
+							</staticText>
+						</cellContents>
+					</crosstabTotalColumnHeader>
+				</columnGroup>
+				<measure name="pagamento_det_vl_pagoMeasure" class="java.lang.Float" calculation="Sum">
+					<measureExpression><![CDATA[$F{pagamento_det_vl_pago}]]></measureExpression>
+				</measure>
+				<crosstabCell width="50" height="25">
+					<cellContents>
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" uuid="8916d279-5aa3-4373-8df4-98f45de113e0"/>
+							<textFieldExpression><![CDATA[$V{pagamento_det_vl_pagoMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell width="50" columnTotalGroup="pagamento_det_dt_pagamento">
+					<cellContents backcolor="#FFFFBF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" uuid="0f6920f4-613a-48fc-95f3-bc2c8e8ba25e"/>
+							<textFieldExpression><![CDATA[$V{pagamento_det_vl_pagoMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell height="25" rowTotalGroup="categoria_conta_descricao">
+					<cellContents backcolor="#FFFFBF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" uuid="bdd09020-fd49-441e-8b95-ba549fe5be7c"/>
+							<textFieldExpression><![CDATA[$V{pagamento_det_vl_pagoMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+				<crosstabCell rowTotalGroup="categoria_conta_descricao" columnTotalGroup="pagamento_det_dt_pagamento">
+					<cellContents backcolor="#FFFFBF" mode="Opaque">
+						<box>
+							<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textField>
+							<reportElement style="Crosstab Data Text" x="0" y="0" width="50" height="25" uuid="07ae6555-60c6-45ef-85fe-23db601d7240"/>
+							<textFieldExpression><![CDATA[$V{pagamento_det_vl_pagoMeasure}]]></textFieldExpression>
+						</textField>
+					</cellContents>
+				</crosstabCell>
+			</crosstab>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d4066ed1-693d-4d57-acc2-baf5937ea734">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="operador" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["VendaPorCliente_ItensVenda.jasper"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nome" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select p.id, p.nome, p.email, pf.cpf, c.datacadastro
+
+from pessoa p, pessoa_fisica pf, cliente c
+where p.id=pf.pessoa_id and p.id=c.pessoa_id and p.nome LIKE $P{nome}
+order by p.nome]]>
+	</queryString>
+	<field name="id" class="java.lang.Long"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="cpf" class="java.lang.String"/>
+	<field name="datacadastro" class="java.sql.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="56" uuid="0efc6338-6f0b-4c2d-828b-b6d78e609f1d"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="57" y="10" width="441" height="35" uuid="d4032739-0f95-42d4-9705-5d1bc8ef9f70"/>
+				<textElement>
+					<font size="28"/>
+				</textElement>
+				<text><![CDATA[Relatório de Venda por Cliente]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="60" width="555" height="20" uuid="2235afea-2ed3-4b8b-8789-cc99318303f3"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="60" width="57" height="20" uuid="04c0c8d2-c9e6-4808-99eb-edc18f9d8a89"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Operador:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="57" y="60" width="230" height="20" uuid="f34a38c1-864e-4de9-b5ce-6ac1af4f527f"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{operador}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="333" y="60" width="38" height="20" uuid="925a34bf-3380-4e7d-9fdb-99404e09a4c9"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Data:]]></text>
+			</staticText>
+			<textField pattern="&quot;dd/MM/yyyy&apos;,às&apos; HH:mm&apos;hs.&apos;&quot;">
+				<reportElement x="381" y="60" width="174" height="20" uuid="fd66d7b4-2c0e-4303-a89f-82ae94a43656"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="120">
+			<staticText>
+				<reportElement x="0" y="20" width="46" height="20" uuid="a062a798-5910-4bcb-a0a6-00cf0897197d"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Cliente :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="20" width="30" height="20" uuid="3267c5b6-e4fb-4a0b-a756-540cb9936039"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[CPF :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="46" height="20" uuid="3557e022-6363-4d01-8213-cc804a11ee72"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Email :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="53" y="20" width="100" height="20" uuid="09c5d869-5774-4286-8908-6f6cf69cb01a"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="53" y="40" width="100" height="20" uuid="9495b1f7-5087-46f2-961a-4e9d56a15d5c"/>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="398" y="20" width="100" height="20" uuid="fb6351b0-9362-49b4-81bb-a4e49470e045"/>
+				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="46" height="20" uuid="9d04dea8-1036-4b81-bd6c-2f630907ef65"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Código :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="53" y="0" width="100" height="20" uuid="2e3d34c7-43bc-4ea6-9d5e-4f60e40c8e7c"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="354" y="1" width="42" height="20" uuid="d337e5ce-4242-424c-a1f7-c8b8aa8475fc"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Desde :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="400" y="1" width="54" height="20" uuid="4a988091-1312-4b52-a296-46506ca4987d"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{datacadastro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="427" y="0" width="128" height="20" uuid="c91c448f-f2c7-4a2a-8a5c-5a4183adb71e"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
