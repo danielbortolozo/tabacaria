@@ -6,6 +6,7 @@
 package menuView;
 
 import cadastroView.BancoView;
+import cadastroView.CashBackView;
 import cadastroView.CategoriaPagamentoView;
 import cadastroView.CategoriaView;
 import cadastroView.CepView;
@@ -239,6 +240,7 @@ public class Menu extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
         jMenu13 = new javax.swing.JMenu();
         jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -856,6 +858,14 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMenu13.add(jMenuItem14);
+
+        jMenuItem11.setText("Cash Back");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenu13.add(jMenuItem11);
 
         jMenu6.add(jMenu13);
 
@@ -1617,6 +1627,21 @@ public class Menu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        CashBackView cashBackView;
+        cashBackView = new CashBackView();
+        
+        if (colaborador.getColaborad().getTipo_usuario().equals("ADMIN")) {
+          carregadorDesktop1.add(cashBackView);
+           cashBackView.setVisible(true);
+        }else       
+           if (daoNivelAcesso.verificaAcesso(jmenuEmpresa.getText(), colaborador.getColaborad())){
+             carregadorDesktop1.add(cashBackView);
+             cashBackView.setVisible(true);   
+            }else
+              JOptionPane.showMessageDialog(null, "Você não têm permissão. Acesso Negado.");  
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
     class hora implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -1690,6 +1715,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;

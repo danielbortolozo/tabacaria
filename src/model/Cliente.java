@@ -40,11 +40,13 @@ public class Cliente implements Serializable {
     private String situacao;
     private BigDecimal limite;
     private BigDecimal credito;
+    
+    @Column(name = "cash_back")
+    private BigDecimal cashBack;
    
     @OneToOne(optional = false)
     private Pessoa pessoa;
 
- 
     //Construtores
 
     public Cliente() {
@@ -53,9 +55,7 @@ public class Cliente implements Serializable {
     public Cliente(Pessoa pessoa) {
         this.pessoa = pessoa;
     }
-    
-  
-    
+       
     //Gets e Sets
     
     public Pessoa getPessoa() {
@@ -118,6 +118,14 @@ public class Cliente implements Serializable {
 
     public void setCredito(BigDecimal credito) {
         this.credito = credito;
+    }
+
+    public BigDecimal getCashBack() {
+        return cashBack;
+    }
+
+    public void setCashBack(BigDecimal cashBack) {
+        this.cashBack = cashBack;
     }
     
 

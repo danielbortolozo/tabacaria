@@ -6,11 +6,16 @@
 package relatoriosView;
 
 import dao.ClienteDAO;
+import dao.PedidoDAO;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Pedido;
 import model.Pessoa;
+import net.sf.jasperreports.engine.JRException;
+import relatoriosView.venda.ImprimirRelMestreDetalheVenda;
+import relatoriosView.venda.RelatorioVendaView;
 
 /**
  *
@@ -151,14 +156,28 @@ public class VendaPorClienteView extends javax.swing.JDialog {
         String cliente = (String) jcbCliente.getSelectedItem();
         
         
+//        try {
+//            ImprimeRelatorio imprimir = new ImprimeRelatorio();
+//            imprimir.vendaPorCliente(operador, cliente);
+//        } catch (Exception ex) {
+//            Logger.getLogger(VendaPorClienteView.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        
+        PedidoDAO pedidoDAO = new PedidoDAO();
+        List<Pedido> listaPedido = new ArrayList<>();
+        Pessoa pessoa = new Pessoa() {};
+          
+        pessoa = listaCliente.get(jcbCliente.getSelectedIndex());                
+        listaPedido = pedidoDAO.listaTodosPedidoPorCliente(pessoa);
+        
+        ImprimirRelMestreDetalheVenda imprimir = new ImprimirRelMestreDetalheVenda();
         try {
-            ImprimeRelatorio imprimir = new ImprimeRelatorio();
-            imprimir.vendaPorCliente(operador, cliente);
-        } catch (Exception ex) {
-            Logger.getLogger(VendaPorClienteView.class.getName()).log(Level.SEVERE, null, ex);
+              imprimir.relatorioMestreDetalhe(listaPedido);
+              dispose();
+        }catch (JRException ex) {
+              Logger.getLogger(RelatorioVendaView.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+      //  
         
         
         

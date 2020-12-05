@@ -181,6 +181,15 @@ public class PedidoDAO {
           //List veiculos = query.getResultList();
          return query.getResultList();        
     }
+    public List<Pedido> listaTodosPedidoPorCliente(Pessoa cliente){
+        EntityManager manager = JPAUtil.getEntityManager();
+        Query query = manager.createQuery(
+                        "from Pedido where cliente = :cliente AND status='FECHADO'");
+          query.setParameter("cliente", cliente);
+          
+          //List veiculos = query.getResultList();
+         return query.getResultList();        
+    }
     
         
     public List<Pedido> listaPedidoAVistaPorPeriodo(Date dtIni, Date dtFim) {
