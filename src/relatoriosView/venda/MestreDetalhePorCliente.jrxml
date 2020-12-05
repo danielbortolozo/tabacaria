@@ -67,6 +67,7 @@
 	<field name="itens" class="java.util.List"/>
 	<field name="desconto" class="java.lang.String"/>
 	<field name="acrescimo" class="java.lang.String"/>
+	<field name="cpfCnpj" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -89,14 +90,14 @@
 			<staticText>
 				<reportElement x="422" y="9" width="26" height="20" uuid="9cee6dbd-58e0-4c3c-8045-3b60a9845d1e"/>
 				<textElement verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
+					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tel. ]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="125" y="5" width="297" height="35" uuid="9ffbde84-9120-408e-a9c7-2769d3460f65"/>
 				<textElement textAlignment="Center">
-					<font fontName="Serif" size="20" isBold="true"/>
+					<font fontName="Serif" size="18" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{empresa_nome}]]></textFieldExpression>
 			</textField>
@@ -131,7 +132,7 @@
 			<textField>
 				<reportElement x="451" y="9" width="105" height="20" uuid="cbc31880-dd0d-4aff-aa32-4cc5f9ab9263"/>
 				<textElement verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
+					<font size="10" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{empresa_telefone}]]></textFieldExpression>
 			</textField>
@@ -145,11 +146,35 @@
 	<columnHeader>
 		<band height="47" splitType="Stretch">
 			<staticText>
-				<reportElement x="152" y="4" width="281" height="22" uuid="c6c914d4-9e0d-4323-a774-74debbd27c60"/>
+				<reportElement x="121" y="2" width="281" height="22" uuid="c6c914d4-9e0d-4323-a774-74debbd27c60"/>
 				<textElement>
 					<font size="18"/>
 				</textElement>
-				<text><![CDATA[Relatorio de Venda Por Cliente	]]></text>
+				<text><![CDATA[Relatorio de venda por cliente	]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="64" y="26" width="254" height="20" uuid="a6f2f211-b8fb-4df2-9b83-beeddd7ef40b"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="26" width="56" height="20" uuid="6e4b1643-c406-4bde-8a9a-f0d303fa6ef0"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CLIENTE :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="453" y="26" width="100" height="20" uuid="08572b83-4afc-4ba0-aa17-253a344ef461"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cpfCnpj}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="390" y="26" width="61" height="20" uuid="3d7679b3-85ae-4ae1-b0d3-fce15694b921"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CPF/CNPJ :]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -159,12 +184,7 @@
 				<reportElement x="0" y="3" width="555" height="51" uuid="230cf5bb-cd36-4360-95ff-eb0984038b16"/>
 			</rectangle>
 			<textField>
-				<reportElement x="63" y="26" width="173" height="20" uuid="a6f2f211-b8fb-4df2-9b83-beeddd7ef40b"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="485" y="4" width="65" height="20" uuid="553c7d59-7e38-4cbd-a492-fce5597d67b5"/>
+				<reportElement x="471" y="4" width="69" height="20" uuid="553c7d59-7e38-4cbd-a492-fce5597d67b5"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
 			</textField>
@@ -258,14 +278,7 @@
 				<text><![CDATA[CÓD. VENDA :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="6" y="26" width="56" height="20" uuid="6e4b1643-c406-4bde-8a9a-f0d303fa6ef0"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[CLIENTE :]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="434" y="4" width="51" height="20" uuid="1e8cff35-b62e-49c3-9e07-2ffde0e12964"/>
+				<reportElement x="423" y="4" width="42" height="20" uuid="1e8cff35-b62e-49c3-9e07-2ffde0e12964"/>
 				<textElement verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>

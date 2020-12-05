@@ -17,6 +17,7 @@ public class VendaMaster {
     
     private int idVenda;
     private String nome;
+    private String cpfCnpj;
     private String data;
     private String valor;
     private String desconto;
@@ -41,7 +42,7 @@ public class VendaMaster {
         this.itens = itens;
     }
 
-    public VendaMaster(int idVenda, String nome, String data, String valor, String desconto, String acrescimo, List itens) {
+    public VendaMaster(int idVenda, String nome, String data, String valor, String desconto, String acrescimo, List itens, String cpfCnpj) {
         this.idVenda = idVenda;
         this.nome = nome;
         this.data = data;
@@ -49,13 +50,20 @@ public class VendaMaster {
         this.desconto = desconto;
         this.acrescimo = acrescimo;
         this.itens = itens;
+        this.cpfCnpj = cpfCnpj;
+    }
+     public VendaMaster(int idVenda, String nome, String data, String valor, String desconto, String acrescimo, List itens) {
+        this.idVenda = idVenda;
+        this.nome = nome;
+        this.data = data;
+        this.valor = valor;
+        this.desconto = desconto;
+        this.acrescimo = acrescimo;
+        this.itens = itens;
+        
     }
     
-     
-    
-    
-    
-       
+          
     public int getIdVenda() {
         return idVenda;
     }
@@ -111,11 +119,12 @@ public class VendaMaster {
     public void setAcrescimo(String acrescimo) {
         this.acrescimo = acrescimo;
     }
-    
-    
-    
-    
-    
-    
-    
+
+    public String getCpfCnpj() {
+        return cpfCnpj;
+    }
+
+    public void setCpfCnpj(String cpfCnpj) {
+        this.cpfCnpj = cpfCnpj;
+    }   
 }

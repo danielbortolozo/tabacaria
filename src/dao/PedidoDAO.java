@@ -185,9 +185,7 @@ public class PedidoDAO {
         EntityManager manager = JPAUtil.getEntityManager();
         Query query = manager.createQuery(
                         "from Pedido where cliente = :cliente AND status='FECHADO'");
-          query.setParameter("cliente", cliente);
-          
-          //List veiculos = query.getResultList();
+          query.setParameter("cliente", cliente);      
          return query.getResultList();        
     }
     
