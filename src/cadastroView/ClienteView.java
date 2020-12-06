@@ -239,6 +239,8 @@ public final class ClienteView extends javax.swing.JFrame {
         jcbSituacaoCliente = new javax.swing.JComboBox();
         cpfLabel8 = new javax.swing.JLabel();
         jtfCreditoCliente = new javax.swing.JTextField();
+        cpfLabel9 = new javax.swing.JLabel();
+        jtfCashBack = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableEndereco = new javax.swing.JTable();
@@ -438,7 +440,6 @@ public final class ClienteView extends javax.swing.JFrame {
 
         jLabel2.setText("CÓDIGO");
 
-        jtfCodigo.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         jtfCodigo.setEnabled(false);
 
         jtfSite.setEnabled(false);
@@ -895,6 +896,24 @@ public final class ClienteView extends javax.swing.JFrame {
             }
         });
 
+        cpfLabel9.setText("CASH BACK");
+
+        jtfCashBack.setEditable(false);
+        jtfCashBack.setBackground(new java.awt.Color(249, 246, 145));
+        jtfCashBack.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jtfCashBack.setText("0,00");
+        jtfCashBack.setEnabled(false);
+        jtfCashBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfCashBackActionPerformed(evt);
+            }
+        });
+        jtfCashBack.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtfCashBackKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -907,10 +926,12 @@ public final class ClienteView extends javax.swing.JFrame {
                     .addComponent(cpfLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jtfLimiteCredito, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(147, 147, 147)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cpfLabel4)
-                    .addComponent(jcbSituacaoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(169, Short.MAX_VALUE))
+                    .addComponent(jcbSituacaoCliente, 0, 166, Short.MAX_VALUE)
+                    .addComponent(cpfLabel9)
+                    .addComponent(jtfCashBack))
+                .addContainerGap(172, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -924,9 +945,15 @@ public final class ClienteView extends javax.swing.JFrame {
                     .addComponent(jtfLimiteCredito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcbSituacaoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cpfLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfCreditoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(cpfLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfCreditoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(cpfLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtfCashBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
@@ -1510,7 +1537,9 @@ public final class ClienteView extends javax.swing.JFrame {
         limite = limite.replace(",", ".");
         jtfLimiteCredito.setText(new DecimalFormat("#,##0.00").format(Double.parseDouble(limite)));
         if (operacao == "salvar")
-        jtfCreditoCliente.setText(new DecimalFormat("#,##0.00").format(Double.parseDouble(limite)));
+           jtfCreditoCliente.setText(new DecimalFormat("#,##0.00").format(Double.parseDouble(limite)));
+        jtfCashBack.setText("0.0");
+        
     }//GEN-LAST:event_jtfLimiteCreditoFocusLost
 
     private void jtfLimiteCreditoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfLimiteCreditoKeyPressed
@@ -1802,6 +1831,9 @@ public final class ClienteView extends javax.swing.JFrame {
             jtfCreditoCliente.setText(cliente.getCli().getCredito().toString());
             jtfCreditoCliente.setText(new DecimalFormat("#,##0.00").format(Double.parseDouble(jtfCreditoCliente.getText())));
             jcbSituacaoCliente.setSelectedItem(cliente.getCli().getSituacao());
+            jtfCashBack.setText(cliente.getCli().getCashBack().toString());
+            jtfCashBack.setText(new DecimalFormat("#,##0.00").format(Double.parseDouble(jtfCashBack.getText()))); 
+         
             //Adicionar enderecos na jTableEndereco.
             List<PessoaEndereco> listaEndereco = new ArrayList<PessoaEndereco>();
             listaEndereco = dao.enderecos(id);
@@ -1824,8 +1856,6 @@ public final class ClienteView extends javax.swing.JFrame {
             jpanelPessoaFisica.setEnabled(true);
             jTabbedPane1.setEnabledAt(2, false);
            // jTabbedPane1.setVisible(false);
-            
-
         } else if (cliente.getTipo().equals("J")) {
             pj = dao.pessoaJuridica(id);
             cliente = dao.cliente(id);
@@ -1849,6 +1879,13 @@ public final class ClienteView extends javax.swing.JFrame {
             
             jtfLimiteCredito.setText(cliente.getCli().getLimite().toString());
             jtfLimiteCredito.setText(new DecimalFormat("#,##0.00").format(Double.parseDouble(jtfLimiteCredito.getText()))); 
+           
+            jtfCreditoCliente.setText(cliente.getCli().getCredito().toString());
+            jtfCreditoCliente.setText(new DecimalFormat("#,##0.00").format(Double.parseDouble(jtfCreditoCliente.getText())));
+            jcbSituacaoCliente.setSelectedItem(cliente.getCli().getSituacao());
+            jtfCashBack.setText(cliente.getCli().getCashBack().toString());
+            jtfCashBack.setText(new DecimalFormat("#,##0.00").format(Double.parseDouble(jtfCashBack.getText()))); 
+                    
             if (cliente.getCli().getSituacao().equals("NORMAL"))
                 jcbSituacaoCliente.setSelectedIndex(0);
             if (cliente.getCli().getSituacao().equals("INADIMPLENTE"))
@@ -2108,6 +2145,14 @@ public final class ClienteView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfCreditoClienteActionPerformed
 
+    private void jtfCashBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCashBackActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfCashBackActionPerformed
+
+    private void jtfCashBackKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCashBackKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfCashBackKeyPressed
+
     public void habilitar(boolean habilita) {
         jtfNome.setEnabled(habilita);
 
@@ -2147,6 +2192,7 @@ public final class ClienteView extends javax.swing.JFrame {
         jtfCNPJ.setEnabled(habilita);
         jtfInscricaoMunicipal.setEnabled(habilita);
         jtfRazaoSocial.setEnabled(habilita);
+        jtfCashBack.setEnabled(habilita);
     }
 
     public void salvar() {
@@ -2301,6 +2347,11 @@ public final class ClienteView extends javax.swing.JFrame {
             credito = credito.replace(".", "");
             credito = credito.replace(",", ".");
             cliente.setCredito(new BigDecimal(credito));
+            
+            String cashBack = jtfCashBack.getText();
+            cashBack = cashBack.replace(".", "");
+            cashBack = cashBack.replace(",", ".");
+            cliente.setCashBack(new BigDecimal(cashBack));
             
             //Adicionando Endereço no Cliente Juridico
              List<PessoaEndereco> listaEndereco = new ArrayList<PessoaEndereco>();
@@ -2545,19 +2596,7 @@ String[] tableColumsName = {"CÓDIGO", "NOME FANTASIA", "CNPJ", "RAZÃO SOCIAL"}
         jtfInscricaoMunicipal.setText("");
         jtfRazaoSocial.setText("");
         jtfCreditoCliente.setText("");
-       // jtfPesquisaCliente.setText("");
-
-   //     jtfEndereco.setText("");
-        //     jtfBairro.setText("");
-        //     jtfCidade.setText("");
-        //     jcbEstado.setSelectedItem(null);
-        //     jtfTelefone.setText("");
-        //     jtfNascimento.setText("");
-        //     jtfDesde.setText("");
-        //     jtfEmpresa.setText("");
-        //     jtfReferencia.setText("");
-        //     jtfFoneRef.setText("");
-        //     
+        jtfCashBack.setText("");           
     }
 
     public JTextField DefinirTiposCaracteresETamanho(int tamanho, String caracteres) {
@@ -2655,6 +2694,7 @@ String[] tableColumsName = {"CÓDIGO", "NOME FANTASIA", "CNPJ", "RAZÃO SOCIAL"}
     private javax.swing.JLabel cpfLabel6;
     private javax.swing.JLabel cpfLabel7;
     private javax.swing.JLabel cpfLabel8;
+    private javax.swing.JLabel cpfLabel9;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -2701,6 +2741,7 @@ String[] tableColumsName = {"CÓDIGO", "NOME FANTASIA", "CNPJ", "RAZÃO SOCIAL"}
     public static javax.swing.JRadioButton jrbFisica;
     public static javax.swing.JRadioButton jrbJuridico;
     private javax.swing.JTextField jtfCNPJ;
+    private javax.swing.JTextField jtfCashBack;
     public static javax.swing.JTextField jtfCodigo;
     private javax.swing.JTextField jtfCpf;
     private javax.swing.JTextField jtfCreditoCliente;

@@ -7,6 +7,7 @@ package relatoriosView;
 
 import dao.ClienteDAO;
 import dao.PedidoDAO;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -28,6 +29,9 @@ public class VendaPorClienteView extends javax.swing.JDialog {
      * Creates new form VendaPorCliente
      */
     List<Pessoa> listaCliente;
+    PedidoDAO pedidoDAO = new PedidoDAO();
+    List<Pedido> listaPedido = new ArrayList<>();
+    Pessoa pessoa = new Pessoa() {};
     
     public VendaPorClienteView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -155,9 +159,7 @@ public class VendaPorClienteView extends javax.swing.JDialog {
 //            Logger.getLogger(VendaPorClienteView.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //        
-        PedidoDAO pedidoDAO = new PedidoDAO();
-        List<Pedido> listaPedido = new ArrayList<>();
-        Pessoa pessoa = new Pessoa() {};
+        
           
         pessoa = listaCliente.get(jcbCliente.getSelectedIndex());                
         listaPedido = pedidoDAO.listaTodosPedidoPorCliente(pessoa);
@@ -173,6 +175,8 @@ public class VendaPorClienteView extends javax.swing.JDialog {
               dispose();
         }catch (JRException ex) {
               Logger.getLogger(RelatorioVendaView.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(VendaPorClienteView.class.getName()).log(Level.SEVERE, null, ex);
         }
       //  
         

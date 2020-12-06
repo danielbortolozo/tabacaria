@@ -425,9 +425,6 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtfCodigo">
                   <Properties>
-                    <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="0" red="0" type="rgb"/>
-                    </Property>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <AuxValues>
@@ -917,11 +914,13 @@
                               <Component id="jtfLimiteCredito" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="147" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="cpfLabel4" min="-2" max="-2" attributes="0"/>
-                              <Component id="jcbSituacaoCliente" min="-2" pref="166" max="-2" attributes="0"/>
+                              <Component id="jcbSituacaoCliente" pref="166" max="32767" attributes="0"/>
+                              <Component id="cpfLabel9" min="-2" max="-2" attributes="0"/>
+                              <Component id="jtfCashBack" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="169" max="32767" attributes="0"/>
+                          <EmptySpace pref="172" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -939,9 +938,18 @@
                               <Component id="jcbSituacaoCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cpfLabel8" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jtfCreditoCliente" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="cpfLabel8" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jtfCreditoCliente" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="cpfLabel9" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jtfCashBack" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                           <EmptySpace pref="36" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -1005,6 +1013,26 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfCreditoClienteActionPerformed"/>
                     <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtfCreditoClienteKeyPressed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="cpfLabel9">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="CASH BACK"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="jtfCashBack">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="91" green="f6" red="f9" type="rgb"/>
+                    </Property>
+                    <Property name="horizontalAlignment" type="int" value="4"/>
+                    <Property name="text" type="java.lang.String" value="0,00"/>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfCashBackActionPerformed"/>
+                    <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtfCashBackKeyPressed"/>
                   </Events>
                 </Component>
               </SubComponents>

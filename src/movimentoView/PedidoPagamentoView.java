@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package movimentoView;
 
 import dao.CaixaDAO;
@@ -62,7 +58,9 @@ public class PedidoPagamentoView extends javax.swing.JDialog {
     PedidoPagamento pedPag;
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     Date dtPagamento = new Date();
-    
+    Cliente cliente = new Cliente();
+    ClienteDAO cliDAO = new ClienteDAO();
+    boolean cashBack = false;
     
     public PedidoPagamentoView(java.awt.Frame parent, boolean modal, String tipoPedido) {
         super(parent, modal);
@@ -129,6 +127,18 @@ public class PedidoPagamentoView extends javax.swing.JDialog {
         
         subTotal = jLabel1.getText();
         
+        if (PedidoView.cliente.getId().equals(1L)){                      
+            jlCashBack.setText("0,00");
+            jbtCashBack.setEnabled(false);
+        }else {
+            cliente = PedidoView.cliente.getCli();
+            jlCashBack.setText(new DecimalFormat("#,##0.00").format(cliente.getCashBack()));
+            double cash = Double.parseDouble(cliente.getCashBack().toString());
+            if (cash <= 0) {
+                jbtCashBack.setEnabled(false);
+            }            
+        }
+        
     }
 
     /**
@@ -143,6 +153,10 @@ public class PedidoPagamentoView extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jbtFinalizar = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jlCashBack = new javax.swing.JLabel();
+        jbtCashBack = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jcbFormaPagto = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
@@ -188,20 +202,47 @@ public class PedidoPagamentoView extends javax.swing.JDialog {
             }
         });
 
+        jLabel8.setText("CASH BACK :");
+
+        jlCashBack.setText("jLabel9");
+        jlCashBack.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+
+        jbtCashBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Dollar.png"))); // NOI18N
+        jbtCashBack.setText("Cash Back");
+        jbtCashBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtCashBackActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("%");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jbtFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlCashBack)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbtCashBack)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jbtFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jbtFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel8)
+                .addComponent(jlCashBack)
+                .addComponent(jbtCashBack, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel9))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Forma de Pagamento"));
@@ -213,7 +254,7 @@ public class PedidoPagamentoView extends javax.swing.JDialog {
             }
         });
 
-        jLabel6.setText("R$ Valor Recebido - eu");
+        jLabel6.setText("R$ Valor Recebido");
 
         jtfVlRecebido.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jtfVlRecebido.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -290,11 +331,11 @@ public class PedidoPagamentoView extends javax.swing.JDialog {
             }
         });
         jtfDesconto.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jtfDescontoKeyPressed(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtfDescontoKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtfDescontoKeyPressed(evt);
             }
         });
 
@@ -311,6 +352,11 @@ public class PedidoPagamentoView extends javax.swing.JDialog {
         jLabel5.setText("R$");
 
         jcbCashBack.setText("Cash Back ");
+        jcbCashBack.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jcbCashBackKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -538,7 +584,8 @@ public class PedidoPagamentoView extends javax.swing.JDialog {
                 
             }
             jcbFormaPagto.setEnabled(true);
-            jcbFormaPagto.requestFocus();
+            //jcbFormaPagto.requestFocus();
+            jcbCashBack.requestFocus();
         }
     }//GEN-LAST:event_jtfDescontoKeyPressed
 
@@ -748,6 +795,7 @@ public class PedidoPagamentoView extends javax.swing.JDialog {
                 } 
                     //fim.
             }
+            jbtCashBack.setEnabled(false);
         }        
     }//GEN-LAST:event_jtfVlRecebidoKeyPressed
 
@@ -895,6 +943,12 @@ public class PedidoPagamentoView extends javax.swing.JDialog {
             //Fim.
 
             //Implementando CashBack
+            if (cashBack){
+                cliente.setCashBack(new BigDecimal(BigInteger.ZERO));                
+                cliDAO.alterarCreditoCliente(cliente);  
+                jlCashBack.setText("0,00");
+            }
+                       
             
             if (jcbCashBack.isSelected()){
                 
@@ -910,18 +964,15 @@ public class PedidoPagamentoView extends javax.swing.JDialog {
                           return;
                        }
                     }  
-                ClienteDAO cliDAO = new ClienteDAO();
+                
                 CashBackDAO cbDAO = new CashBackDAO();
-                Cliente cliente = new Cliente();
-                cliente = PedidoView.cliente.getCli();
+                
+                
                 CashBack cb = new CashBack();
                 cb = cbDAO.cashBack(1L);
                 valorCompraCashBack = valorCompraCashBack.add(cb.getValorCompra());
-                System.out.println("Cash back valor compra: "+valorCompraCashBack);
-              
                 pontosCashBack = pontosCashBack.add(cb.getPontos());
-                System.out.println("PontosCashBack :"+pontosCashBack);
-                  System.out.println("pedTotal :"+pedPag.getTotal());      
+             
                 double totalCompra = Double.parseDouble(pedPag.getTotal().toString());
                 double valorCashBack = Double.parseDouble(valorCompraCashBack.toString());
                 double cashBackCliente = (totalCompra / valorCashBack);
@@ -929,46 +980,20 @@ public class PedidoPagamentoView extends javax.swing.JDialog {
                 String cashBackClienteStr = String.valueOf(cashBackCliente);
                 int pos = cashBackClienteStr.indexOf(".");
                 cashBackClienteStr = cashBackClienteStr.substring(0, pos);
-                cashBackCliente = Double.parseDouble(cashBackClienteStr);
-            
-                System.out.println("Cash back cliente str: "+cashBackClienteStr);
-                   
-                System.out.println("Cashback cliente :"+cashBackCliente);
-                
+                cashBackCliente = Double.parseDouble(cashBackClienteStr);         
+                            
                 pontosTotalCashBack = (pontosCashBack.multiply(new BigDecimal(cashBackCliente)));
-                           
-                System.out.println("PontosTotal totalCompra/valorCompraCashBack :"+pontosTotalCashBack);
+                                           
+                pontosTotalCashBack =  pontosTotalCashBack.add(new BigDecimal(cliente.getCashBack().toString()));
                 
-                
-                System.out.println("Total passando pelo cash back :"+cashBackCliente);
-               // pedPag.getTotal()
-              
-                System.out.println("Cash  Back do cliente :"+cliente.getCashBack());
-                
-                
-                 pontosTotalCashBack =  pontosTotalCashBack.add(new BigDecimal(cliente.getCashBack().toString()));
-                
-                 System.out.println("Total acumulado :"+pontosTotalCashBack);
                 cliente.setCashBack(pontosTotalCashBack);
                 
-                cliDAO.alterarCreditoCliente(cliente);
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                JOptionPane.showMessageDialog(null, "Aqui implemento o cash back.");
-                
+                cliDAO.alterarCreditoCliente(cliente);                 
             }
             
             //fimCashBackk
             
-            
-            
+                        
             //Registra no caixa.
             caixa = caixaDao.carregaCaixa(menuView.Menu.colaborador);
             
@@ -1417,6 +1442,49 @@ public class PedidoPagamentoView extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfDescontoActionPerformed
 
+    private void jcbCashBackKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jcbCashBackKeyPressed
+
+         if (evt.getKeyCode() == evt.VK_ENTER){
+             
+             jcbFormaPagto.requestFocus();
+         }
+    }//GEN-LAST:event_jcbCashBackKeyPressed
+
+    private void jbtCashBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCashBackActionPerformed
+
+        
+        String vltotalStr = jLabel1.getText();
+        vltotalStr = vltotalStr.replace(",", ".");       
+        double vltotal = Double.parseDouble(vltotalStr);
+        
+        String porcentagemStr = jlCashBack.getText();
+        porcentagemStr = porcentagemStr.replace(",", ".");
+        
+        double porcentagem = Double.parseDouble(porcentagemStr);
+       //  vlVenda = (vlUnit +(vlUnit*porcentagem/100));
+       
+       double desconto = 0;
+       double soma = 0;
+       soma = (vltotal - (vltotal * porcentagem)/100);       
+       desconto = (vltotal - soma);                 
+       jLabel1.setText(new DecimalFormat("#,##0.00").format(soma));
+       jtfRestante.setText(new DecimalFormat("#,##0.00").format(soma));
+       jtfVlRecebido.setText("");
+       jtfDesconto.setEnabled(false);
+       jtfAcrescimos.setEnabled(false);       
+       jtfDesconto.setText(new DecimalFormat("#,##0.00").format(desconto));
+       jlCashBack.setText(new DecimalFormat("#,##0.00").format(cliente.getCashBack()));      
+       jcbFormaPagto.setEnabled(true);
+       jbtCashBack.setEnabled(false);
+       cashBack = true;
+       
+       jtfAcrescimos.setText("0,00");
+       jcbFormaPagto.requestFocus();
+       
+        
+        
+    }//GEN-LAST:event_jbtCashBackActionPerformed
+
     private void carregarCombobox(){         
         tipoPagDAO = new TipoPagamentoDAO();
         listaTipoPagamento = new ArrayList<>();
@@ -1489,14 +1557,18 @@ public class PedidoPagamentoView extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton jbtCashBack;
     private javax.swing.JButton jbtFinalizar;
     private javax.swing.JCheckBox jcbCashBack;
     private javax.swing.JComboBox<String> jcbFormaPagto;
+    private javax.swing.JLabel jlCashBack;
     private javax.swing.JTextField jtfAcrescimos;
     private javax.swing.JTextField jtfDesconto;
     private javax.swing.JTextField jtfRestante;
