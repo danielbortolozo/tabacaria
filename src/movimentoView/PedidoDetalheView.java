@@ -694,7 +694,10 @@ public class PedidoDetalheView extends javax.swing.JDialog {
     }//GEN-LAST:event_jbtAdicionarActionPerformed
 
     private void jtfQuantidadeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfQuantidadeKeyPressed
-       jbtAdicionar.requestFocus();
+        if (evt.getKeyCode() == evt.VK_ENTER){ 
+           jbtAdicionar.requestFocus();
+        }
+        
     }//GEN-LAST:event_jtfQuantidadeKeyPressed
 
     private void jrbVarejoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbVarejoActionPerformed
