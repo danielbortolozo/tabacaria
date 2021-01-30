@@ -8,6 +8,7 @@ package movimentoView;
 import dao.ClienteDAO;
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Objects;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Pessoa;
@@ -276,14 +277,10 @@ public class PesquisaClienteView extends javax.swing.JDialog {
 
     
         
-     private void carregaTablePessoa() {
-
-   
+     private void carregaTablePessoa() { 
 
         DefaultTableModel amodel = (DefaultTableModel) jTable1.getModel();
         amodel.setNumRows(0);
-        //List<PessoaFisica> pf = new List<PessoaFisica>() {};
-        //PessoaJuridica pj = new PessoaJuridica();
         
         daoCliente = new ClienteDAO();
         listaClienteFisico = daoCliente.getClienteFisico();
@@ -293,25 +290,20 @@ public class PesquisaClienteView extends javax.swing.JDialog {
             
             if (p.getTipo().equals("F")){
                for (PessoaFisica pf : listaClienteFisico){
-                   if (p.getId() == pf.getId()){
+                   if (Objects.equals(p.getId(), pf.getId())){
                       amodel.addRow(new Object[]{pf.getId(), pf.getNome(), pf.getCpf(), pf.getRg()});
                       break;
                    }
-               }               
+                }               
             }else
                 if (p.getTipo().equals("J")){
-                    for (PessoaJuridica pj : listaClienteJuridico){
-                        if (p.getId() == pj.getId()){
-                            amodel.addRow(new Object[]{pj.getId(), pj.getNome(), pj.getCnpj(), pj.getInscrecao_estadual()}); 
-                            break;
-                        }
-                            
-                    }
-                   
+                   for (PessoaJuridica pj : listaClienteJuridico){
+                       if (Objects.equals(p.getId(), pj.getId())){
+                          amodel.addRow(new Object[]{pj.getId(), pj.getNome(), pj.getCnpj(), pj.getInscrecao_estadual()}); 
+                          break;
+                       }                            
+                    }                   
                 }
-
-            
-
         }
     }
         

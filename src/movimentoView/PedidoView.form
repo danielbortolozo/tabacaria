@@ -357,7 +357,6 @@
               <Image iconType="3" name="/imagens/delete.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Excluir Pedido"/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtExcluirPedidoActionPerformed"/>
@@ -373,7 +372,6 @@
               <Image iconType="3" name="/imagens/Find.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Venda [F6]"/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtPesquisaPedidoActionPerformed"/>

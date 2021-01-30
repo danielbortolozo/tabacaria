@@ -192,23 +192,8 @@ public class ClienteDAO {
         EntityTransaction tx = manager.getTransaction();
         tx.begin();
         PessoaFisica pf = manager.find(PessoaFisica.class, id);
-        PessoaFisica pessoaFisica = new PessoaFisica();
-        
-        pessoaFisica.setId(id);
-        pessoaFisica.setNome(pf.getNome());
-        pessoaFisica.setEmail(pf.getEmail());
-        pessoaFisica.setSite(pf.getSite());
-        pessoaFisica.setTipo(pf.getTipo());
-        pessoaFisica.setCpf(pf.getCpf());
-        pessoaFisica.setEstado_civil(pf.getEstado_civil());
-        pessoaFisica.setSexo(pf.getSexo());
-        pessoaFisica.setRg(pf.getRg());
-        pessoaFisica.setOrgao_rg(pf.getOrgao_rg());
-        pessoaFisica.setData_emissao(pf.getData_emissao());
-                 
-        manager.close();
-        
-        return pessoaFisica;      
+        manager.close();       
+        return pf;      
     }
     public PessoaJuridica pessoaJuridica(Long id){
         EntityManager manager = JPAUtil.getEntityManager();
@@ -403,9 +388,7 @@ public class ClienteDAO {
 //    }
     public List<Pessoa>  listaCliente(){
         EntityManager manager = JPAUtil.getEntityManager();
-      //  EntityTransaction tx = manager.getTransaction();
-       // tx.begin();
-         List<Pessoa> p = null;
+        List<Pessoa> p = null;
         try{
             p = manager.createQuery("from Pessoa where cliente = 'S' order by nome", Pessoa.class).getResultList();
         }catch(Exception e){
@@ -413,13 +396,6 @@ public class ClienteDAO {
         }finally{
             manager.close();
         }    
-        return p;
-        
-    }
-    
-    
-    
-    
-    
-    
+        return p;        
+    }   
 }

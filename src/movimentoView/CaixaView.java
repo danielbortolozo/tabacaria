@@ -454,16 +454,16 @@ public class CaixaView extends javax.swing.JDialog {
                 .addContainerGap())
             .addComponent(jbtAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jbtExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jSeparator4)
+            .addComponent(jbtSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jbtAbrirCaixa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
                     .addComponent(jLabel17)
-                    .addComponent(jlStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jlStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtFechaCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jSeparator4)
-            .addComponent(jbtSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jbtFechaCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jbtAbrirCaixa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -588,7 +588,8 @@ public class CaixaView extends javax.swing.JDialog {
         jtfDinheiroEntrada.setFocusable(false);
 
         jLabel6.setFont(new java.awt.Font("DejaVu Sans", 0, 12)); // NOI18N
-        jLabel6.setText("Cheque");
+        jLabel6.setText("Pix");
+        jLabel6.setToolTipText("");
 
         jtfChequeEntrada.setEditable(false);
         jtfChequeEntrada.setFont(new java.awt.Font("DejaVu Sans", 0, 12)); // NOI18N
@@ -742,7 +743,7 @@ public class CaixaView extends javax.swing.JDialog {
         jLabel26.setText("Cartão-Crédito");
 
         jLabel27.setFont(new java.awt.Font("DejaVu Sans", 0, 12)); // NOI18N
-        jLabel27.setText("Cheque");
+        jLabel27.setText("Pix");
 
         jLabel28.setFont(new java.awt.Font("DejaVu Sans", 0, 12)); // NOI18N
         jLabel28.setText("Vale Alimentação");

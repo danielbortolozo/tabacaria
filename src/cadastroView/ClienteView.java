@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFormattedTextField;
@@ -1489,7 +1490,7 @@ public final class ClienteView extends javax.swing.JFrame {
                         + "Nome: "+p.getNome());
                 return;
             }   
-            jbtSalvar.setEnabled(true);
+            
             jcbEstadoCivil.setEnabled(true);
             jcbEstadoCivil.requestFocus();
 
@@ -1778,6 +1779,7 @@ public final class ClienteView extends javax.swing.JFrame {
 //        PessoaJuridica pj = new PessoaJuridica();
         //Instancia cliente
         Pessoa cliente = new Pessoa() {};
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         //Código de pessoa.
         Long id = (Long) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
         jTabbedPane1.setSelectedIndex(0);
@@ -1820,12 +1822,23 @@ public final class ClienteView extends javax.swing.JFrame {
             jtfOrgaoRg.setText(pf.getOrgao_rg());
             //Data Emissao RG
             if (pf.getData_emissao() == null) {
-                jftfDt_EmissaoRG.setText("");
-            } else {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                jftfDt_EmissaoRG.setText("");              
+            } else {                
                 String dt_emissao = sdf.format(pf.getData_emissao()); // Converte data para string.
                 jftfDt_EmissaoRG.setText(dt_emissao);
             }
+            //pf.getData_nascimento() == null
+            //Data Emissao RG
+            System.out.println("data nasc: pf"+pf.getData_nascimento());
+            if (pf.getData_nascimento() == null || pf.getData_nascimento().equals("")) {         
+                jftfNascimento.setText("");
+                System.out.println("data vazia...");                
+            } else {                
+                String dt_nasc = sdf.format(pf.getData_nascimento()); // Converte data para string.
+                System.out.println("Data nascimento :"+dt_nasc);
+                jftfNascimento.setText(dt_nasc);
+            }           
+            
             jtfLimiteCredito.setText(cliente.getCli().getLimite().toString());
             jtfLimiteCredito.setText(new DecimalFormat("#,##0.00").format(Double.parseDouble(jtfLimiteCredito.getText()))); 
             jtfCreditoCliente.setText(cliente.getCli().getCredito().toString());
@@ -2122,6 +2135,7 @@ public final class ClienteView extends javax.swing.JFrame {
             jbtAdicionarEndereco.requestFocus();
 
             // jbtSalvar.requestFocus();
+            jbtSalvar.setEnabled(true);
         }
         
     }//GEN-LAST:event_jtfCreditoClienteKeyPressed
@@ -2193,10 +2207,11 @@ public final class ClienteView extends javax.swing.JFrame {
         jtfInscricaoMunicipal.setEnabled(habilita);
         jtfRazaoSocial.setEnabled(habilita);
         jtfCashBack.setEnabled(habilita);
+        jftfNascimento.setEnabled(habilita);
     }
 
     public void salvar() {
-        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         
         if (jrbFisica.isSelected()) {           
             pf.setTipo("F");
@@ -2265,15 +2280,22 @@ public final class ClienteView extends javax.swing.JFrame {
             }
             if (jftfDt_EmissaoRG.getText() == null || jftfDt_EmissaoRG.getText().equals("")) {               
                 jftfDt_EmissaoRG.setText(null);
-            } else {
-               
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            } else {                
                 try {
-                    pf.setData_emissao((sdf.parse(jftfDt_EmissaoRG.getText())));
+                    pf.setData_emissao(sdf.parse(jftfDt_EmissaoRG.getText()));
                 } catch (ParseException ex) {
                     JOptionPane.showMessageDialog(null, "Data Inválida!!!");
                 }
-            }         
+            }       
+            if (jftfNascimento.getText() == null || jftfNascimento.getText().equals("")) {
+                jftfNascimento.setText(null);
+            }else {
+                try {
+                    pf.setData_nascimento(sdf.parse(jftfNascimento.getText()));
+                }catch (ParseException ex) {
+                    JOptionPane.showMessageDialog(null, "Data inválida!!!");
+                }
+            }
         } else 
             if (jrbJuridico.isSelected()) { 
                pj.setTipo("J");
@@ -2327,7 +2349,7 @@ public final class ClienteView extends javax.swing.JFrame {
                  
         }
         //Cliente
-          SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+ //         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             
             Cliente cliente = new Cliente();
             try {
@@ -2596,7 +2618,8 @@ String[] tableColumsName = {"CÓDIGO", "NOME FANTASIA", "CNPJ", "RAZÃO SOCIAL"}
         jtfInscricaoMunicipal.setText("");
         jtfRazaoSocial.setText("");
         jtfCreditoCliente.setText("");
-        jtfCashBack.setText("");           
+        jtfCashBack.setText("");  
+        jftfNascimento.setText("");
     }
 
     public JTextField DefinirTiposCaracteresETamanho(int tamanho, String caracteres) {
@@ -2656,10 +2679,13 @@ String[] tableColumsName = {"CÓDIGO", "NOME FANTASIA", "CNPJ", "RAZÃO SOCIAL"}
         listaClienteJuridico = daoCliente.getClienteJuridica();
         listaCliente = daoCliente.listaCliente();//daoCli.getClienteFisico();
         for (Pessoa p : listaCliente) {
-            
+            System.out.println("pessoa :"+p.getNome());
+                    
             if (p.getTipo().equals("F")){
                for (PessoaFisica pf : listaClienteFisico){
-                   if (p.getId() == pf.getId()){                       
+                   if (Objects.equals(p.getId(), pf.getId())){    
+                       System.out.println("Carregar Cliente: "+pf.getId()+" - "+pf.getNome());
+                       
                       amodel.addRow(new Object[]{pf.getId(), pf.getNome(), pf.getCpf(), pf.getRg()});
                       break;
                    }
@@ -2667,7 +2693,7 @@ String[] tableColumsName = {"CÓDIGO", "NOME FANTASIA", "CNPJ", "RAZÃO SOCIAL"}
             }else
                 if (p.getTipo().equals("J")){
                     for (PessoaJuridica pj : listaClienteJuridico){
-                        if (p.getId() == pj.getId()){
+                        if (Objects.equals(p.getId(), pj.getId())){
                             amodel.addRow(new Object[]{pj.getId(), pj.getNome(), pj.getCnpj(), pj.getInscrecao_estadual()}); 
                             break;
                         }

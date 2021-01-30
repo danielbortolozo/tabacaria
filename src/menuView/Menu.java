@@ -73,6 +73,7 @@ import relatoriosView.ImprimeRelatorio;
 import relatoriosView.contasapagar.PagamentoPorPeriodoDeVencimentoAPagar;
 import relatoriosView.RelatorioProdutoView;
 import relatoriosView.VendaPorClienteView;
+import relatoriosView.clientes.AniversariantesMesView;
 import relatoriosView.movimentoConta.SaldoContasView;
 import relatoriosView.venda.RelatorioVendaView;
 import relatoriosView.venda.categoria.RelVendaPorCategoriaProdView;
@@ -234,6 +235,8 @@ public class Menu extends javax.swing.JFrame {
         jmenuRelContasaPagarPerVenc = new javax.swing.JMenuItem();
         jMenu12 = new javax.swing.JMenu();
         jmenuSaldoContas = new javax.swing.JMenuItem();
+        jMenu15 = new javax.swing.JMenu();
+        jMenuItem10 = new javax.swing.JMenuItem();
         jMenu14 = new javax.swing.JMenu();
         jmenuGraficoFaturamento = new javax.swing.JMenu();
         jmenuGraficoFatMes = new javax.swing.JMenuItem();
@@ -748,7 +751,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu5.add(jmenuRelProdutos);
 
-        jMenu8.setText("Venda");
+        jMenu8.setText("Vendas");
 
         jMenuItem3.setText("Por Cliente");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -792,7 +795,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu5.add(jMenu8);
 
-        jMenu9.setText("Compra");
+        jMenu9.setText("Compras");
 
         jmenuRelCompraPerCompra.setText("Por Período de Emissão da Compra");
         jmenuRelCompraPerCompra.addActionListener(new java.awt.event.ActionListener() {
@@ -828,6 +831,18 @@ public class Menu extends javax.swing.JFrame {
         jMenu12.add(jmenuSaldoContas);
 
         jMenu5.add(jMenu12);
+
+        jMenu15.setText("Clientes");
+
+        jMenuItem10.setText("Aniversariantes do mês");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        jMenu15.add(jMenuItem10);
+
+        jMenu5.add(jMenu15);
 
         jMenuBar1.add(jMenu5);
 
@@ -1642,6 +1657,22 @@ public class Menu extends javax.swing.JFrame {
               JOptionPane.showMessageDialog(null, "Você não têm permissão. Acesso Negado.");  
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        AniversariantesMesView aniverMView;
+        aniverMView = new AniversariantesMesView();
+        
+        if (colaborador.getColaborad().getTipo_usuario().equals("ADMIN")) {
+          carregadorDesktop1.add(aniverMView);
+           aniverMView.setVisible(true);
+        }else       
+           if (daoNivelAcesso.verificaAcesso(jmenuEmpresa.getText(), colaborador.getColaborad())){
+             carregadorDesktop1.add(aniverMView);
+             aniverMView.setVisible(true);   
+            }else
+              JOptionPane.showMessageDialog(null, "Você não têm permissão. Acesso Negado.");              
+    
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
     class hora implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -1705,6 +1736,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu13;
     private javax.swing.JMenu jMenu14;
+    private javax.swing.JMenu jMenu15;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -1715,6 +1747,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;

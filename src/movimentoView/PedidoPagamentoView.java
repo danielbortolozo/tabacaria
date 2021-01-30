@@ -1015,11 +1015,12 @@ public class PedidoPagamentoView extends javax.swing.JDialog {
                     //Para subtrair o valor do troco, colocou mais porque
                     //o troco é um valor negativo, e negativo com negativo é positivo, por isso que colocou operador de "+".
                     //Subtrair.
-                    if (itens.getTipoPagamento().getDescricao().equals("CHEQUE")){   // 4 = Cheque.                                          
-                        if (javax.swing.JOptionPane.showConfirmDialog(null, "O valor recebido é Maior que o total. \n"
-                                + "Não foi apresentado valor em dinheiro para o troco. \n "
-                                + "Faça um lançamento no caixa para o troco. Deseja realmente continuar? ", "ATENÇÂO ", javax.swing.JOptionPane.YES_NO_OPTION) == 0) {
-                        }
+                    if (itens.getTipoPagamento().getDescricao().equals("PIX")){   // 4 = Cheque.                                          
+//                        if (javax.swing.JOptionPane.showConfirmDialog(null, "O valor recebido é Maior que o total. \n"
+//                                + "Não foi apresentado valor em dinheiro para o troco. \n "
+//                                + "Faça um lançamento no caixa para o troco. Deseja realmente continuar? ", "ATENÇÂO ", javax.swing.JOptionPane.YES_NO_OPTION) == 0) 
+//                        {
+//                        }
                         entradaStr = String.valueOf(itens.getValor());
                         
                     }else{
@@ -1193,7 +1194,7 @@ public class PedidoPagamentoView extends javax.swing.JDialog {
                           
                             listaItensCaixa.add(caixaItens);                           
                         }else //Cheque
-                            if (itens.getTipoPagamento().getDescricao().equals("CHEQUE")){
+                            if (itens.getTipoPagamento().getDescricao().equals("PIX")){
                                 //Inserir no caixa.
                                 caixa.setChequeEntrada(caixa.getChequeEntrada().add(new BigDecimal(entradaStr)));
                                 caixa.setTotalEntrada(caixa.getTotalEntrada().add(new BigDecimal(entradaStr)));
@@ -1202,7 +1203,7 @@ public class PedidoPagamentoView extends javax.swing.JDialog {
                                 
                                 CaixaItens caixaItens = new CaixaItens();
                                 caixaItens.setDescricao("VENDA Nº: "+pedPag.getPedido().getId());
-                                caixaItens.setFormaPagto("CHEQUE");
+                                caixaItens.setFormaPagto("PIX");
                                 caixaItens.setIdCaixa(caixa);
                                 caixaItens.setTipo("VENDA");
                                 if (this.tipoPedido.equals("BALCAO") || this.tipoPedido.equals("BALCAO1"))

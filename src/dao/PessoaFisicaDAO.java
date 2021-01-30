@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.swing.JOptionPane;
 import model.Pessoa;
 import model.PessoaContato;
@@ -105,5 +107,26 @@ public class PessoaFisicaDAO {
       //  return null;
     }
     
+    
+  
+    public List<Object[]> listaAniversariantesMes(){
+        EntityManager  manager = JPAUtil.getEntityManager();
+         List<Object[]> objects = null;
+        try{
+                                       
+            Query query = manager.createNativeQuery(
+                    "select pe.id, pe.nome, Extract(Day From data_nascimento) as dia  \n" +
+                    "From pessoa_fisica pf, pessoa pe \n" +
+                    "Where pe.id=pf.pessoa_id AND Extract(Month From data_nascimento) = Extract(Month From Now()) "           
+            );
+            
+           
+            objects = query.getResultList();
+        
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return objects;
+    }
     
 }

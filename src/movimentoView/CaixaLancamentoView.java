@@ -111,7 +111,7 @@ public class CaixaLancamentoView extends javax.swing.JDialog {
         });
 
         buttonGroup1.add(jrbCheque);
-        jrbCheque.setText("Cheque");
+        jrbCheque.setText("Pix");
         jrbCheque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrbChequeActionPerformed(evt);
@@ -523,7 +523,7 @@ public class CaixaLancamentoView extends javax.swing.JDialog {
             formaPagto = "DINHEIRO";
         }else 
             if (jrbCheque.isSelected()){
-                formaPagto = "CHEQUE";
+                formaPagto = "PIX";
             }else
                 if (jrbCartaoCredito.isSelected())
                     formaPagto = "CARTAO CREDITO";

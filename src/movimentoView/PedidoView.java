@@ -53,6 +53,7 @@ public class PedidoView extends javax.swing.JDialog {
     public static PedidoPagamentoView pedidoPagView = null;
     public static PesquisaClienteView pesCli = null;
     public static PesquisaProdutoView pProdView = null;
+    public static PesquisaPedidoView formPesPedido = null;
     public PedidoView(java.awt.Frame parent, boolean modal, List<PedidoItens> listaItens, Pessoa clienteOrc ) {
         super(parent, modal);
         initComponents();
@@ -416,7 +417,6 @@ public class PedidoView extends javax.swing.JDialog {
 
         jbtExcluirPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/delete.png"))); // NOI18N
         jbtExcluirPedido.setText("Excluir Pedido");
-        jbtExcluirPedido.setEnabled(false);
         jbtExcluirPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtExcluirPedidoActionPerformed(evt);
@@ -430,7 +430,6 @@ public class PedidoView extends javax.swing.JDialog {
 
         jbtPesquisaPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Find.png"))); // NOI18N
         jbtPesquisaPedido.setText("Venda [F6]");
-        jbtPesquisaPedido.setEnabled(false);
         jbtPesquisaPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtPesquisaPedidoActionPerformed(evt);
@@ -610,6 +609,12 @@ public class PedidoView extends javax.swing.JDialog {
         pedidoPagView.setTitle("Pagamento Balcão");
         pedidoPagView.setLocationRelativeTo(null); // centraliza a tela
         pedidoPagView.setVisible(true);        
+    }
+    public static void formPesquisaPedido(){    
+       
+        formPesPedido = new PesquisaPedidoView();
+        
+                
     }
     
     public static void formPesquisaCliente(){        
@@ -831,7 +836,7 @@ private void carregaTable(List<PedidoItens> listaItens){
 
     private void jbtPesquisaPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPesquisaPedidoActionPerformed
 
-        // TODO add your handling code here:
+        formPesquisaPedido();
     }//GEN-LAST:event_jbtPesquisaPedidoActionPerformed
 
     public static void  registraPedido() {
