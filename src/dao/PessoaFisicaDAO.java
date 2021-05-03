@@ -117,7 +117,8 @@ public class PessoaFisicaDAO {
             Query query = manager.createNativeQuery(
                     "select pe.id, pe.nome, Extract(Day From data_nascimento) as dia  \n" +
                     "From pessoa_fisica pf, pessoa pe \n" +
-                    "Where pe.id=pf.pessoa_id AND Extract(Month From data_nascimento) = Extract(Month From Now()) "           
+                    "Where pe.id=pf.pessoa_id AND Extract(Month From data_nascimento) = Extract(Month From Now())"
+                            + "order by pf.data_nascimento"    
             );
             
            
