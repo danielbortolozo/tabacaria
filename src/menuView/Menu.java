@@ -75,6 +75,7 @@ import relatoriosView.RelatorioProdutoView;
 import relatoriosView.VendaPorClienteView;
 import relatoriosView.clientes.AniversariantesMesView;
 import relatoriosView.movimentoConta.SaldoContasView;
+import relatoriosView.venda.RelatorioClienteMaisConsomeView;
 import relatoriosView.venda.RelatorioVendaView;
 import relatoriosView.venda.categoria.RelVendaPorCategoriaProdView;
 import relatoriosView.venda.itens.RelVendaPorItenView;
@@ -225,7 +226,8 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jmenuRelCompraPorPeriodo = new javax.swing.JMenuItem();
+        jmenuRelVendaPorPeriodo = new javax.swing.JMenuItem();
+        jMenuRelVendaPorPeriodoMaiorConsumidor = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
@@ -761,13 +763,21 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu8.add(jMenuItem3);
 
-        jmenuRelCompraPorPeriodo.setText("Por Período");
-        jmenuRelCompraPorPeriodo.addActionListener(new java.awt.event.ActionListener() {
+        jmenuRelVendaPorPeriodo.setText("Por Período Cronológico");
+        jmenuRelVendaPorPeriodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmenuRelCompraPorPeriodoActionPerformed(evt);
+                jmenuRelVendaPorPeriodoActionPerformed(evt);
             }
         });
-        jMenu8.add(jmenuRelCompraPorPeriodo);
+        jMenu8.add(jmenuRelVendaPorPeriodo);
+
+        jMenuRelVendaPorPeriodoMaiorConsumidor.setText("Por Período Maior Consumidor");
+        jMenuRelVendaPorPeriodoMaiorConsumidor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuRelVendaPorPeriodoMaiorConsumidorActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuRelVendaPorPeriodoMaiorConsumidor);
 
         jMenuItem4.setText("Resumo de Venda do Dia");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -1223,7 +1233,7 @@ public class Menu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jmenuRelContasaPagarPerVencActionPerformed
 
-    private void jmenuRelCompraPorPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenuRelCompraPorPeriodoActionPerformed
+    private void jmenuRelVendaPorPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenuRelVendaPorPeriodoActionPerformed
         RelatorioVendaView relVenda = new RelatorioVendaView();   
                         
          if (colaborador.getColaborad().getTipo_usuario().equals("ADMIN")) {
@@ -1232,13 +1242,13 @@ public class Menu extends javax.swing.JFrame {
             relVenda.setVisible(true);
                          
         }else       
-           if (daoNivelAcesso.verificaAcesso("Relatórios Compra "+jmenuRelCompraPorPeriodo.getText(), colaborador.getColaborad())){
+           if (daoNivelAcesso.verificaAcesso("Relatórios Compra "+jmenuRelVendaPorPeriodo.getText(), colaborador.getColaborad())){
       //         desktopPane.add(relVenda);
                carregadorDesktop1.add(relVenda);
                relVenda.setVisible(true);
             }else
               JOptionPane.showMessageDialog(null, "Você não têm permissão. Acesso Negado.");                                     
-    }//GEN-LAST:event_jmenuRelCompraPorPeriodoActionPerformed
+    }//GEN-LAST:event_jmenuRelVendaPorPeriodoActionPerformed
 
     private void jmenuProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenuProdutoActionPerformed
         jbtProdutosActionPerformed(evt);
@@ -1673,6 +1683,26 @@ public class Menu extends javax.swing.JFrame {
     
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
+    private void jMenuRelVendaPorPeriodoMaiorConsumidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRelVendaPorPeriodoMaiorConsumidorActionPerformed
+
+        
+          RelatorioClienteMaisConsomeView relVenda = new RelatorioClienteMaisConsomeView();   
+                        
+         if (colaborador.getColaborad().getTipo_usuario().equals("ADMIN")) {
+      //      desktopPane.add(relVenda);
+            carregadorDesktop1.add(relVenda);
+            relVenda.setVisible(true);
+                         
+        }else       
+           if (daoNivelAcesso.verificaAcesso("Relatórios Compra "+jmenuRelVendaPorPeriodo.getText(), colaborador.getColaborad())){
+      //         desktopPane.add(relVenda);
+               carregadorDesktop1.add(relVenda);
+               relVenda.setVisible(true);
+            }else
+              JOptionPane.showMessageDialog(null, "Você não têm permissão. Acesso Negado.");                                     
+
+    }//GEN-LAST:event_jMenuRelVendaPorPeriodoMaiorConsumidorActionPerformed
+
     class hora implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -1758,6 +1788,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem jMenuRelVendaPorPeriodoMaiorConsumidor;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
@@ -1809,9 +1840,9 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmenuPedidoTrocaPresente;
     public static javax.swing.JMenuItem jmenuProduto;
     private javax.swing.JMenuItem jmenuRelCompraPerCompra;
-    private javax.swing.JMenuItem jmenuRelCompraPorPeriodo;
     private javax.swing.JMenuItem jmenuRelContasaPagarPerVenc;
     private javax.swing.JMenu jmenuRelProdutos;
+    private javax.swing.JMenuItem jmenuRelVendaPorPeriodo;
     private javax.swing.JMenuItem jmenuSair;
     private javax.swing.JMenuItem jmenuSaldoContas;
     private javax.swing.JMenuItem jmenuTipoPag;

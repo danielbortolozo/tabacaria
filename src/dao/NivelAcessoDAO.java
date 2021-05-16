@@ -21,8 +21,7 @@ import model.Produto;
  */
 public class NivelAcessoDAO {
     private EntityManager manager;
-    
-    
+       
     
     public NivelAcesso salvar(NivelAcesso nivel){
         EntityManager manager = JPAUtil.getEntityManager();
@@ -82,7 +81,7 @@ public class NivelAcessoDAO {
 //       }
 //    }
      
- public boolean verificaAcesso(String modulo, Colaborador idColaborador){
+    public boolean verificaAcesso(String modulo, Colaborador idColaborador){
         EntityManager manager = JPAUtil.getEntityManager();        
         Query query = manager.createQuery(
                         "select n from NivelAcesso n where n.nomeModulo = :modulo and n.idColaborador = :idColaborador");
@@ -90,8 +89,7 @@ public class NivelAcessoDAO {
           query.setParameter("idColaborador", idColaborador);
           
           List lista = query.getResultList();
-          
-          System.out.println("Tamanho da lista ="+lista.size());
+                    
           if (lista.size() > 0)
               return true;
           else            

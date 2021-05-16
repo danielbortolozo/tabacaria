@@ -18,6 +18,7 @@ import model.Pedido;
 import model.CategoriaProduto;
 import model.PedidoItens;
 import model.Pessoa;
+import relatoriosView.venda.PedidoVendaMaiorConsumidor;
 
 /**
  *
@@ -196,11 +197,14 @@ public class PedidoDAO {
         return manager.createQuery(jpql, Pedido.class)
         .setParameter("dtIni", dtIni)
         .setParameter("dtFim", dtFim)
-        .getResultList();
+        .getResultList();    
     } 
+    
+   
+    
+    
     public List<Pedido> listaPedidoAPrazoPorPeriodo(Date dtIni, Date dtFim) {
         EntityManager manager = JPAUtil.getEntityManager();
-        System.out.println("vou fazer a pesquisa");
         String jpql = "SELECT c FROM Pedido c WHERE c.dtCad BETWEEN :dtIni AND :dtFim AND c.tipoVenda <> 'A VISTA'";
         return manager.createQuery(jpql, Pedido.class)
         .setParameter("dtIni", dtIni)
@@ -366,6 +370,46 @@ public class PedidoDAO {
         return query.getResultList();
     }
     
-    
-    
+    public List<Object[]> listaPedidoPorPeriodoMaiorConsumidor(Date dtIni, Date dtFim, String tipoVenda) {
+        EntityManager manager = JPAUtil.getEntityManager();
+        TypedQuery<Object[]> query = null;
+        
+        try {
+            if (tipoVenda.equals("A VISTA")) {                    
+                query = manager.createQuery(
+                  "select p.cliente.nome, sum(pi.vlSubtotal) as total "
+                + "from PedidoItens pi "
+                + "inner join pi.pedido p where pi.pedido.dtCad BETWEEN :dtIni AND :dtFim "                      
+                + "AND p.tipoVenda = 'A VISTA' "
+                + "group by p.cliente.nome order by total desc", Object[].class);
+                query.setParameter("dtIni", dtIni);
+                query.setParameter("dtFim", dtFim);
+            
+            } else {          
+                if (tipoVenda.equals("A PRAZO")){
+                    query = manager.createQuery(
+                      "select p.cliente.nome, sum(pi.vlSubtotal) as total "
+                    + "from PedidoItens pi "
+                    + "inner join pi.pedido p where pi.pedido.dtCad BETWEEN :dtIni AND :dtFim "                      
+                    + "AND p.tipoVenda = 'CREDIARIO' OR p.tipoVenda = 'FIADO' "
+                    + "group by p.cliente.nome order by total desc", Object[].class);
+                    query.setParameter("dtIni", dtIni);
+                    query.setParameter("dtFim", dtFim);               
+                
+                } else { 
+                        query = manager.createQuery(
+                          "select p.cliente.nome, sum(pi.vlSubtotal) as total "
+                        + "from PedidoItens pi "
+                        + "inner join pi.pedido p where pi.pedido.dtCad BETWEEN :dtIni AND :dtFim "                      
+                        + "group by p.cliente.nome order by total desc", Object[].class);
+                        query.setParameter("dtIni", dtIni);
+                        query.setParameter("dtFim", dtFim);
+                }        
+            }
+            
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        return query.getResultList();         
+    } 
 }

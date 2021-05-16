@@ -366,12 +366,20 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem3ActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jmenuRelCompraPorPeriodo">
+                <MenuItem class="javax.swing.JMenuItem" name="jmenuRelVendaPorPeriodo">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Por Per&#xed;odo"/>
+                    <Property name="text" type="java.lang.String" value="Por Per&#xed;odo Cronol&#xf3;gico"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmenuRelCompraPorPeriodoActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmenuRelVendaPorPeriodoActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="jMenuRelVendaPorPeriodoMaiorConsumidor">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Por Per&#xed;odo Maior Consumidor"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuRelVendaPorPeriodoMaiorConsumidorActionPerformed"/>
                   </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
