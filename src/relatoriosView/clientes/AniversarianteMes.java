@@ -6,15 +6,52 @@
 package relatoriosView.clientes;
 
 
-public class AniversarianteMes {
+public class AniversarianteMes implements Comparable<AniversarianteMes> {
 
-  private Long id;
+  private String id;
   private String nome;
-  private String diaAniversario;
-  
-  
-  
-  
+  private Integer diaAniversario;
+
+    public AniversarianteMes(String id, String nome, int diaAniversario) {
+        this.id = id;
+        this.nome = nome;
+        this.diaAniversario = diaAniversario;
+    }
+
+   
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Integer getDiaAniversario() {
+        return diaAniversario;
+    }
+
+    public void setDiaAniversario(Integer diaAniversario) {
+        this.diaAniversario = diaAniversario;
+    }
+
+    @Override
+    public int compareTo(AniversarianteMes another) {
+       return Integer.compare(another.getDiaAniversario(), getDiaAniversario());
+     
+    }
+    
+
+   
     
 
     

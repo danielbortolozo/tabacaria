@@ -7,18 +7,12 @@ package relatoriosView.clientes;
 
 
 
-import cadastroView.*;
-import dao.BancoDAO;
 import dao.PessoaFisicaDAO;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-import menuView.Menu;
-import model.Banco;
-import util.RemoverAcentosString;
 
 
 /**
@@ -30,7 +24,7 @@ public class AniversariantesMesView extends javax.swing.JInternalFrame {
     /**
      * Creates new form CepView
      */
-    List<AniversarianteMes> listaAniversariantes;
+    List<AniversarianteMes> listaAniversariantes = new ArrayList<>();
     String operacao;
     public AniversariantesMesView() {
         initComponents();
@@ -49,14 +43,11 @@ public class AniversariantesMesView extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        rowSorterToStringConverter1 = new converter.RowSorterToStringConverter();
         jPanel3 = new javax.swing.JPanel();
         jbtSair = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-
-        rowSorterToStringConverter1.setTable(jTable2);
 
         setTitle("Aniversariantes do Mês");
 
@@ -96,22 +87,15 @@ public class AniversariantesMesView extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "CÓDIGO", "NOME", "DIA"
+                "CÓDIGO", "NOME", "DIA "
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
         });
         jTable2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
@@ -127,11 +111,7 @@ public class AniversariantesMesView extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(jTable2);
         if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setResizable(false);
-            jTable2.getColumnModel().getColumn(0).setPreferredWidth(130);
-            jTable2.getColumnModel().getColumn(1).setResizable(false);
             jTable2.getColumnModel().getColumn(1).setPreferredWidth(400);
-            jTable2.getColumnModel().getColumn(2).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -142,7 +122,9 @@ public class AniversariantesMesView extends javax.swing.JInternalFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -230,21 +212,24 @@ public class AniversariantesMesView extends javax.swing.JInternalFrame {
         objects = pessoaFDao.listaAniversariantesMes();
        // AniversarianteMes
         
-        listaAniversariantes = null;
-        int dia = 0;
-                
+      //  listaAniversariantes = null;
+        Integer dia = 0;
+        String diaStr = null;        
         for (Object[] obj : objects){
             
           //  jTable2.setValueAt();
-        //    dia = Integer.parseInt(new DecimalFormat("#,##0.0").format((obj[2].toString())));
-                    
-            amodel.addRow(new Object[]{obj[0], obj[1], new DecimalFormat("#,##0").format((obj[2]))});
-            
-            
-        }
-    }
-    
-      
+          diaStr = obj[2].toString();
+          diaStr = diaStr.replace(".0", "");
+          dia = Integer.parseInt(diaStr);
+          listaAniversariantes.add(new AniversarianteMes(obj[0].toString(), obj[1].toString(), dia));
+                 
+        }        
+       Collections.sort(listaAniversariantes, Collections.reverseOrder());   
+             
+       for (AniversarianteMes m : listaAniversariantes) {
+           amodel.addRow(new Object[]{m.getId(), m.getNome(), m.getDiaAniversario()});
+       } 
+    }    
     
     
 
@@ -254,6 +239,5 @@ public class AniversariantesMesView extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
     private javax.swing.JButton jbtSair;
-    private converter.RowSorterToStringConverter rowSorterToStringConverter1;
     // End of variables declaration//GEN-END:variables
 }

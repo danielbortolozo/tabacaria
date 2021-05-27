@@ -274,14 +274,14 @@ public final class ClienteView extends javax.swing.JFrame {
         binding.setConverter(rowSorterToStringConverter1);
         bindingGroup.addBinding(binding);
 
-        jtfPesquisaCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfPesquisaClienteActionPerformed(evt);
-            }
-        });
         jtfPesquisaCliente.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jtfPesquisaClienteFocusLost(evt);
+            }
+        });
+        jtfPesquisaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfPesquisaClienteActionPerformed(evt);
             }
         });
         jtfPesquisaCliente.addKeyListener(new java.awt.event.KeyAdapter() {
